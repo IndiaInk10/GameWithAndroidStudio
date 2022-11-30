@@ -10,7 +10,7 @@ import java.util.Observer;
  * and render all objects to the screen
  */
 public class GameLoop extends Thread {
-    private static final double MAX_UPS = 60.0;
+    public static final double MAX_UPS = 60.0;
     // in Runtime, it can't be change
     private static final double UPS_PERIOD = 1E+3/MAX_UPS;
     private Game game;
