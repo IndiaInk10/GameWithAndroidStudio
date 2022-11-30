@@ -3,6 +3,7 @@ package com.example.a2dtopviewsurvival;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -13,8 +14,8 @@ import androidx.core.content.ContextCompat;
 // render screen and touch input controller
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
+    private final Player player;
     private GameLoop gameLoop;
-    private Context context;
 
     public Game(Context context) {
         super(context);
@@ -23,9 +24,27 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
 
-        this.context = context;
         gameLoop = new GameLoop(this, surfaceHolder);
+
+        // Initialize player
+        player = new Player(getContext(), 2*500, 500, 30);
+
         setFocusable(true);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // Handle touch event actions
+        switch(event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                player.setPosition((double)event.getX(), (double)event.getY());
+                return true;
+            case MotionEvent.ACTION_MOVE:
+                player.setPosition((double)event.getX(), (double)event.getY());
+                return true;
+        }
+
+        return super.onTouchEvent(event);
     }
 
     @Override
@@ -49,13 +68,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         drawUPS(canvas);
         drawFPS(canvas);
+
+        player.draw(canvas);
     }
 
     // draw update per seconds
     public void drawUPS(Canvas canvas) {
         String averageUPS = Double.toString(gameLoop.getAverageUPS());
         Paint paint = new Paint();
-        int Color = ContextCompat.getColor(context, R.color.green);
+        int Color = ContextCompat.getColor(getContext(), R.color.green);
         paint.setColor(Color);
         paint.setTextSize(50);
         canvas.drawText("UPS : " + averageUPS, 50, 100, paint);
@@ -63,7 +84,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void drawFPS(Canvas canvas) {
         String averageFPS = Double.toString(gameLoop.getAverageFPS());
         Paint paint = new Paint();
-        int Color = ContextCompat.getColor(context, R.color.green);
+        int Color = ContextCompat.getColor(getContext(), R.color.green);
         paint.setColor(Color);
         paint.setTextSize(50);
         canvas.drawText("FPS : " + averageFPS, 50, 150, paint);
@@ -71,6 +92,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
         // Update gmae state
+        player.update();
     }
 }
 
