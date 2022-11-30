@@ -1,4 +1,4 @@
-package com.example.a2dtopviewsurvival;
+package com.example.a2dtopviewsurvival.object;
 
 import android.content.Context;
 import android.graphics.Canvas;

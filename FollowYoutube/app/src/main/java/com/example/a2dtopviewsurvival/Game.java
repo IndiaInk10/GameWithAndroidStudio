@@ -6,10 +6,12 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import com.example.a2dtopviewsurvival.object.Enemy;
+import com.example.a2dtopviewsurvival.object.Player;
 
 // render screen and touch input controller
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
@@ -32,7 +34,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         // Initialize game objects
         joystick = new Joystick(275, 700, 70, 40);
         player = new Player(getContext(), joystick, 2*500, 500, 30);
-        enemy = new Enemy();
+        enemy = new Enemy(getContext(), player, 500, 200, 30);
 
         setFocusable(true);
     }
@@ -84,6 +86,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         joystick.draw(canvas);
         player.draw(canvas);
+        enemy.draw(canvas);
     }
 
     // draw update per seconds
@@ -105,9 +108,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        // Update gmae state
+        // Update game state
         joystick.update();
         player.update();
+        enemy.update();
     }
 }
 
