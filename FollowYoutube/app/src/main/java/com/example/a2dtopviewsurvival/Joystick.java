@@ -10,10 +10,10 @@ public class Joystick {
     private Paint innerCirclePaint;
     private int outerCircleRadius;
     private int innerCircleRadius;
-    private int outerCircleCenterPoistionX;
-    private int outerCircleCenterPoistionY;
-    private int innerCircleCenterPoistionX;
-    private int innerCircleCenterPoistionY;
+    private int outerCircleCenterPositionX;
+    private int outerCircleCenterPositionY;
+    private int innerCircleCenterPositionX;
+    private int innerCircleCenterPositionY;
 
     private double joystickCenterToTouchDistance;
     private boolean isPressed;
@@ -22,10 +22,10 @@ public class Joystick {
 
     public Joystick(int centerPositionX, int centerPositionY, int outerCircleRadius, int innerCircleRadius) {
         // Outer and inner circle make up the joystick
-        outerCircleCenterPoistionX = centerPositionX;
-        outerCircleCenterPoistionY = centerPositionY;
-        innerCircleCenterPoistionX = centerPositionX;
-        innerCircleCenterPoistionY = centerPositionY;
+        outerCircleCenterPositionX = centerPositionX;
+        outerCircleCenterPositionY = centerPositionY;
+        innerCircleCenterPositionX = centerPositionX;
+        innerCircleCenterPositionY = centerPositionY;
 
         // Radius of circles
         this.outerCircleRadius = outerCircleRadius;
@@ -44,15 +44,15 @@ public class Joystick {
     public void draw(Canvas canvas) {
         // Draw outer circle
         canvas.drawCircle(
-                outerCircleCenterPoistionX,
-                outerCircleCenterPoistionY,
+                outerCircleCenterPositionX,
+                outerCircleCenterPositionY,
                 outerCircleRadius,
                 outerCirclePaint
         );
         // Draw inner circle
         canvas.drawCircle(
-                innerCircleCenterPoistionX,
-                innerCircleCenterPoistionY,
+                innerCircleCenterPositionX,
+                innerCircleCenterPositionY,
                 innerCircleRadius,
                 innerCirclePaint
         );
@@ -64,12 +64,12 @@ public class Joystick {
     }
 
     private void updateInnerCirclePosition() {
-        innerCircleCenterPoistionX = (int) (outerCircleCenterPoistionX + actuatorX*outerCircleRadius);
-        innerCircleCenterPoistionY = (int) (outerCircleCenterPoistionY + actuatorY*outerCircleRadius);
+        innerCircleCenterPositionX = (int) (outerCircleCenterPositionX + actuatorX*outerCircleRadius);
+        innerCircleCenterPositionY = (int) (outerCircleCenterPositionY + actuatorY*outerCircleRadius);
     }
 
     public boolean isPressed(double touchPositionX, double touchPositionY) {
-        joystickCenterToTouchDistance = calculateDistance(touchPositionX, touchPositionY);
+        joystickCenterToTouchDistance = Utils.getDistanceBetweenPoints(outerCircleCenterPositionX, outerCircleCenterPositionY, touchPositionX, touchPositionY);
         return joystickCenterToTouchDistance < outerCircleRadius;
     }
 
@@ -81,9 +81,9 @@ public class Joystick {
     }
 
     public void setActuator(double touchPositionX, double touchPositionY) {
-        double deltaX = touchPositionX - outerCircleCenterPoistionX;
-        double deltaY = touchPositionY - outerCircleCenterPoistionY;
-        double deltaDistance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        double deltaX = touchPositionX - outerCircleCenterPositionX;
+        double deltaY = touchPositionY - outerCircleCenterPositionY;
+        double deltaDistance = Utils.getDistanceBetweenPoints(0, 0, deltaX, deltaY);
 
         if(deltaDistance < outerCircleRadius) {
             actuatorX = deltaX/outerCircleRadius;
@@ -96,19 +96,6 @@ public class Joystick {
     public void resetActuator() {
         actuatorX = 0.0;
         actuatorY = 0.0;
-    }
-
-    private double calculateDistance(double x, double y) {
-        return Math.sqrt(
-                Math.pow(outerCircleCenterPoistionX - x, 2) +
-                Math.pow(outerCircleCenterPoistionY - y, 2)
-        );
-    }
-    private double calculateDistance(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(
-                Math.pow(x1 - x2, 2) +
-                Math.pow(y1 - y2, 2)
-        );
     }
 
     public double getActuatorX() {

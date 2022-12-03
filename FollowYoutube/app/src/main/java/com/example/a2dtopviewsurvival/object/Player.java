@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import com.example.a2dtopviewsurvival.GameLoop;
 import com.example.a2dtopviewsurvival.Joystick;
 import com.example.a2dtopviewsurvival.R;
+import com.example.a2dtopviewsurvival.Utils;
 
 public class Player extends Circle {
 
@@ -31,6 +32,14 @@ public class Player extends Circle {
         // Update position
         positionX += velocityX;
         positionY += velocityY;
+
+        // Update direction
+        if(velocityX != 0 || velocityY != 0) {
+            // Nomralize velocity to get direction (unit vector of velocity)
+            double distance = Utils.getDistanceBetweenPoints(0, 0, velocityX, velocityY);
+            directionX = velocityX / distance;
+            directionY = velocityY / distance;
+        }
     }
 
     public void setPosition(double positionX, double positionY) {

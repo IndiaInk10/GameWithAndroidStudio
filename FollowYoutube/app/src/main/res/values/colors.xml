@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#FF00FF00</color>
     <color name="player">#FF00FF00</color>
+    <color name="spell">#FFFFFF00</color>
     <color name="enemy">#FFFF0000</color>
 </resources>
