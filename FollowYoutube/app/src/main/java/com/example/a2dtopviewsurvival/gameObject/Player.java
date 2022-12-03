@@ -1,4 +1,4 @@
-package com.example.a2dtopviewsurvival.object;
+package com.example.a2dtopviewsurvival.gameObject;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,7 +10,8 @@ import android.graphics.Canvas;
 import androidx.core.content.ContextCompat;
 
 import com.example.a2dtopviewsurvival.GameLoop;
-import com.example.a2dtopviewsurvival.Joystick;
+import com.example.a2dtopviewsurvival.gamePanel.HealthBar;
+import com.example.a2dtopviewsurvival.gamePanel.Joystick;
 import com.example.a2dtopviewsurvival.R;
 import com.example.a2dtopviewsurvival.Utils;
 

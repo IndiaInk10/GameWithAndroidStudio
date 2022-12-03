@@ -1,8 +1,10 @@
-package com.example.a2dtopviewsurvival;
+package com.example.a2dtopviewsurvival.gamePanel;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import com.example.a2dtopviewsurvival.Utils;
 
 public class Joystick {
 

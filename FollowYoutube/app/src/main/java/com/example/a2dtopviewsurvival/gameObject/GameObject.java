@@ -1,4 +1,4 @@
-package com.example.a2dtopviewsurvival.object;
+package com.example.a2dtopviewsurvival.gameObject;
 
 import android.graphics.Canvas;
 
@@ -23,8 +23,8 @@ public abstract class GameObject {
     public abstract void draw(Canvas canvas);
     public abstract void update();
 
-    protected double getPositionX() {  return positionX;  }
-    protected double getPositionY() {  return positionY;  }
+    public double getPositionX() {  return positionX;  }
+    public double getPositionY() {  return positionY;  }
     protected static double getDistanceBetweenObjects(GameObject obj1, GameObject obj2) {
         return Math.sqrt(
                 Math.pow(obj1.getPositionX() - obj2.getPositionX(), 2) +

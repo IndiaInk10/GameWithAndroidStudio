@@ -13,4 +13,5 @@
     <color name="enemy">#FFFF0000</color>
     <color name="healthBarBorder">#FFA0A0A0</color>
     <color name="healthBarHealth">#FFFF0000</color>
+    <color name="gameOver">#FFFF0000</color>
 </resources>

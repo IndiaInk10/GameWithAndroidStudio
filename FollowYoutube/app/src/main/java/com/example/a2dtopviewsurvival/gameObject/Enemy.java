@@ -1,4 +1,4 @@
-package com.example.a2dtopviewsurvival.object;
+package com.example.a2dtopviewsurvival.gameObject;
 
 import android.content.Context;
 

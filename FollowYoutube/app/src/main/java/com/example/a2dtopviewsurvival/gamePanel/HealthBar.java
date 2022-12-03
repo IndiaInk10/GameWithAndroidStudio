@@ -1,4 +1,4 @@
-package com.example.a2dtopviewsurvival.object;
+package com.example.a2dtopviewsurvival.gamePanel;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import androidx.core.content.ContextCompat;
 
 import com.example.a2dtopviewsurvival.R;
+import com.example.a2dtopviewsurvival.gameObject.Player;
 
 /**
  * HealthBar displays the players health to the screen
