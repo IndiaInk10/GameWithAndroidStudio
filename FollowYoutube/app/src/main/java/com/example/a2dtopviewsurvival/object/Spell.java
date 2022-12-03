@@ -18,7 +18,7 @@ public class Spell extends Circle {
                 ContextCompat.getColor(context, R.color.spell),
                 spellCaster.getPositionX(),
                 spellCaster.getPositionY(),
-                25.0
+                15.0
         );
 
         velocityX = spellCaster.getDirectionX() * MAX_SPEED;
