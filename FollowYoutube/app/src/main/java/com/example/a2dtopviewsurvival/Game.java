@@ -3,6 +3,7 @@ package com.example.a2dtopviewsurvival;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -95,17 +96,24 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        Log.d("Game.java", "surfaceCreated()");
+
+        if(gameLoop.getState().equals(Thread.State.TERMINATED)) {
+            SurfaceHolder surfaceHolder = getHolder();
+            surfaceHolder.addCallback(this);
+            gameLoop = new GameLoop(this, surfaceHolder);
+        }
         gameLoop.startLoop();
     }
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-
+        Log.d("Game.java", "surfaceChanged()");
     }
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-
+        Log.d("Game.java", "surfaceDestroyed()");
     }
 
     // rendering screen
@@ -137,6 +145,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void update() {
         // Stop updating the game if the player is dead
         if(player.getHealthPoints() <= 0) {
+            joystick.resetActuator();
             return;
         }
 
@@ -186,6 +195,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }
         }
+    }
+
+    public void pause() {
+        gameLoop.stopLoop();
     }
 }
 
