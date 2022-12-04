@@ -16,8 +16,12 @@ public class SpriteSheet {
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.space_girl, bitmapOptions);
     }
 
-    public Sprite getPlayerSprite() {
-        return new Sprite(this, new Rect(0, 0, 64, 64));
+    public Sprite[] getPlayerSpriteArray() {
+        Sprite[] spriteArray = new Sprite[4];
+        for(int i = 0; i < 4; i++) {
+            spriteArray[i] = new Sprite(this, new Rect(64 * i, 0, 64 * (i+1), 64));
+        }
+        return spriteArray;
     }
 
     public Bitmap getBitmap() {

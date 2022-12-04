@@ -21,6 +21,7 @@ import com.example.a2dtopviewsurvival.gameObject.Spell;
 import com.example.a2dtopviewsurvival.gamePanel.Joystick;
 import com.example.a2dtopviewsurvival.gamePanel.Performance;
 import com.example.a2dtopviewsurvival.graphics.SpriteSheet;
+import com.example.a2dtopviewsurvival.graphics.Animator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -57,7 +58,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         // Initialize game objects
         SpriteSheet spriteSheet = new SpriteSheet(context);
-        player = new Player(context, joystick, 2*500, 500, 30, spriteSheet.getPlayerSprite());
+        Animator animator = new Animator(spriteSheet.getPlayerSpriteArray());
+        player = new Player(context, joystick, 2*500, 500, 30, animator);
 
         // Initialize game display and center it around the player
         DisplayMetrics displayMetrics = new DisplayMetrics();

@@ -16,6 +16,7 @@ import com.example.a2dtopviewsurvival.gamePanel.HealthBar;
 import com.example.a2dtopviewsurvival.gamePanel.Joystick;
 import com.example.a2dtopviewsurvival.R;
 import com.example.a2dtopviewsurvival.Utils;
+import com.example.a2dtopviewsurvival.graphics.Animator;
 import com.example.a2dtopviewsurvival.graphics.Sprite;
 
 public class Player extends Circle {
@@ -26,14 +27,16 @@ public class Player extends Circle {
     private final Joystick joystick;
     private HealthBar healthBar;
     private int healthPoints;
-    private Sprite sprite;
+    private Animator animator;
+    private PlayerState playerState;
 
-    public Player(Context context, Joystick joystick, double positionX, double positionY, double radius, Sprite sprite) {
+    public Player(Context context, Joystick joystick, double positionX, double positionY, double radius, Animator animator) {
         super(context, ContextCompat.getColor(context, R.color.player), positionX, positionY, radius);
         this.joystick = joystick;
         this.healthBar = new HealthBar(context, this);
         this.healthPoints = MAX_HEALTH_POINTS;
-        this.sprite = sprite;
+        this.animator = animator;
+        this.playerState = new PlayerState(this);
     }
 
     public void update() {
@@ -52,14 +55,12 @@ public class Player extends Circle {
             directionX = velocityX / distance;
             directionY = velocityY / distance;
         }
+
+        playerState.update();
     }
 
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
-        sprite.draw(
-                canvas,
-                (int) gameDisplay.gameToDisplayCoordinatesX(getPositionX()) - sprite.getWidth()/2,
-                (int) gameDisplay.gameToDisplayCoordinatesY(getPositionY()) - sprite.getHeight()/2
-        );
+        animator.draw(canvas, gameDisplay, this);
         healthBar.draw(canvas, gameDisplay);
     }
 
@@ -75,5 +76,9 @@ public class Player extends Circle {
     public void setHealthPoints(int healthPoints) {
         if(healthPoints < 0) return;
         this.healthPoints = healthPoints;
+    }
+
+    public PlayerState getPlayerState() {
+        return playerState;
     }
 }
