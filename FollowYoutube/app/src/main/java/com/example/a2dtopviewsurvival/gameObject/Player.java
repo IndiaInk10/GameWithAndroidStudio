@@ -9,6 +9,8 @@ import android.graphics.Canvas;
  */
 import androidx.core.content.ContextCompat;
 
+import com.example.a2dtopviewsurvival.Game;
+import com.example.a2dtopviewsurvival.GameDisplay;
 import com.example.a2dtopviewsurvival.GameLoop;
 import com.example.a2dtopviewsurvival.gamePanel.HealthBar;
 import com.example.a2dtopviewsurvival.gamePanel.Joystick;
@@ -49,9 +51,9 @@ public class Player extends Circle {
         }
     }
 
-    public void draw(Canvas canvas) {
-        super.draw(canvas);
-        healthBar.draw(canvas);
+    public void draw(Canvas canvas, GameDisplay gameDisplay) {
+        super.draw(canvas, gameDisplay);
+        healthBar.draw(canvas, gameDisplay);
     }
 
     public void setPosition(double positionX, double positionY) {

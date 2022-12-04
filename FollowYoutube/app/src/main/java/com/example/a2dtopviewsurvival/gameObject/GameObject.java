@@ -2,6 +2,8 @@ package com.example.a2dtopviewsurvival.gameObject;
 
 import android.graphics.Canvas;
 
+import com.example.a2dtopviewsurvival.GameDisplay;
+
 /***
  * GameObject is an abstract class which is the foundation of all world objects in the game
  */
@@ -20,7 +22,7 @@ public abstract class GameObject {
         this.positionY = positionY;
     }
 
-    public abstract void draw(Canvas canvas);
+    public abstract void draw(Canvas canvas, GameDisplay gameDisplay);
     public abstract void update();
 
     public double getPositionX() {  return positionX;  }
