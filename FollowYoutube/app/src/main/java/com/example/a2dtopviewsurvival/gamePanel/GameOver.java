@@ -6,6 +6,7 @@ import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.a2dtopviewsurvival.GameLoop;
 import com.example.a2dtopviewsurvival.R;
 
 /**

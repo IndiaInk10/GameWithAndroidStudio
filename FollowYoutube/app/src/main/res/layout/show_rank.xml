@@ -6,69 +6,51 @@
     android:background="@color/black"
     >
 
+    <TextView
+        android:layout_weight="0.1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="RANK(TOP 3)"
+        android:textColor="@color/white"
+        android:textSize="50dp" />
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="20dp"
         android:layout_weight="0.3"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:orientation="horizontal"
+        android:gravity="top|center"
         >
+        <EditText
+            android:id="@+id/nameTxt"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:focusable="false"
+            android:text="name"
+            android:background="@color/black"
+            android:textColor="@color/white" />
 
-        <TextView
+        <EditText
             android:id="@+id/scoreTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:focusable="false"
             android:gravity="center"
-            android:text="SCORE : 0"
-            android:textColor="@color/white"
-            android:textSize="50dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/nameTxt"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center"
-                android:hint="please enter your name"
-                android:textColorHint="@color/lightGray"
-                android:textColor="@color/black" />
-
-            <Button
-                android:id="@+id/storeBtn"
-                android:layout_width="85dp"
-                android:layout_height="40dp"
-                android:background="@drawable/dark_green_btn"
-                android:gravity="center"
-                android:text="Store"
-                android:textColor="@color/white" />
-        </LinearLayout>
-
+            android:text="score"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.7"
+        android:layout_height="20dp"
+        android:layout_weight="0.3"
         android:orientation="horizontal"
         android:gravity="top|center"
         >
-        <Button
-            android:id="@+id/retryBtn"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="50dp"
-            android:text="Retry"
-            android:background="@drawable/dark_red_btn"
-            android:textColor="@color/white"
-            android:gravity="center"
-            />
         <Button
             android:id="@+id/menuBtn"
             android:layout_width="150dp"
