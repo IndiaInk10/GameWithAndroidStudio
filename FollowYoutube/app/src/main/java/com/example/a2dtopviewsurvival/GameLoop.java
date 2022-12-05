@@ -1,5 +1,7 @@
 package com.example.a2dtopviewsurvival;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -20,9 +22,12 @@ public class GameLoop extends Thread {
     private double averageUPS = 0.0;
     private double averageFPS = 0.0;
 
-    public GameLoop(Game game, SurfaceHolder surfaceHolder) {
+    private int survivalTime = 0;
+
+    public GameLoop(Game game, SurfaceHolder surfaceHolder, int survivalTime) {
         this.game = game;
         this.surfaceHolder = surfaceHolder;
+        this.survivalTime = survivalTime;
     }
 
     public double getAverageUPS() {
@@ -31,6 +36,7 @@ public class GameLoop extends Thread {
     public double getAverageFPS() {
         return averageFPS;
     }
+    public int getSurvivalTime() {  return survivalTime; }
 
     public void startLoop() {
         Log.d("GameLoop.java", "startLoop()");
@@ -106,6 +112,8 @@ public class GameLoop extends Thread {
 
                 updateCount = frameCount = 0;
                 startTime = System.currentTimeMillis();
+
+                survivalTime++;
             }
         }
     }
@@ -120,5 +128,10 @@ public class GameLoop extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();;
         }
+    }
+
+    public void endLoop() {
+        isRunning = false;
+        game.setSurvivalTime(survivalTime);
     }
 }

@@ -17,7 +17,7 @@ public class StartGame extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("MainActivity.java", "onCreate()");
+        Log.d("StartGame.java", "onCreate()");
         super.onCreate(savedInstanceState);
 
         // Set content view to game, so that objects in the Game class can be rendered to the screen
@@ -29,34 +29,34 @@ public class StartGame extends Activity {
 
     @Override
     protected void onStart() {
-        Log.d("MainActivity.java", "onStart()");
+        Log.d("StartGame.java", "onStart()");
         super.onStart();
     }
     @Override
     protected void onResume() {
-        Log.d("MainActivity.java", "onResume()");
+        Log.d("StartGame.java", "onResume()");
         super.onResume();
     }
     @Override
     protected void onPause() {
-        Log.d("MainActivity.java", "onPause()");
+        Log.d("StartGame.java", "onPause()");
         game.pause();
         super.onPause();
     }
     @Override
     protected void onStop() {
-        Log.d("MainActivity.java", "onStop()");
+        Log.d("StartGame.java", "onStop()");
         super.onStop();
     }
     @Override
     protected void onDestroy() {
-        Log.d("MainActivity.java", "onDestroy()");
+        Log.d("StartGame.java", "onDestroy()");
         super.onDestroy();
     }
 
     @Override
     public void onBackPressed() {
-        Log.d("MainActivity.java", "onBackPressed()");
+        Log.d("StartGame.java", "onBackPressed()");
         // Comment out super to prevent any back press action
         // super.onBackPressed();
     }

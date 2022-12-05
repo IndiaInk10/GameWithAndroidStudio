@@ -1,10 +1,12 @@
 package com.example.a2dtopviewsurvival.gamePanel;
 
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.a2dtopviewsurvival.Utils;
+import com.example.a2dtopviewsurvival.R;
 
 public class Joystick {
 
@@ -22,6 +24,7 @@ public class Joystick {
     private double actuatorX;
     private double actuatorY;
 
+    @SuppressLint("ResourceAsColor")
     public Joystick(int centerPositionX, int centerPositionY, int outerCircleRadius, int innerCircleRadius) {
         // Outer and inner circle make up the joystick
         outerCircleCenterPositionX = centerPositionX;

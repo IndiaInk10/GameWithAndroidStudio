@@ -41,9 +41,9 @@ public class MainActivity extends Activity {
         rankBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, Self1303.class) ;
-//
-//                startActivity(intent) ;
+                Intent intent = new Intent(MainActivity.this, ShowRank.class) ;
+
+                startActivity(intent) ;
             }
         });
 

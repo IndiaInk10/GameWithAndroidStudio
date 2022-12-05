@@ -1,17 +1,20 @@
 package com.example.a2dtopviewsurvival;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import com.example.a2dtopviewsurvival.gameObject.Circle;
 import com.example.a2dtopviewsurvival.gameObject.Enemy;
@@ -19,7 +22,7 @@ import com.example.a2dtopviewsurvival.gamePanel.GameOver;
 import com.example.a2dtopviewsurvival.gameObject.Player;
 import com.example.a2dtopviewsurvival.gameObject.Spell;
 import com.example.a2dtopviewsurvival.gamePanel.Joystick;
-import com.example.a2dtopviewsurvival.gamePanel.Performance;
+import com.example.a2dtopviewsurvival.gamePanel.GameInfo;
 import com.example.a2dtopviewsurvival.graphics.SpriteSheet;
 import com.example.a2dtopviewsurvival.graphics.Animator;
 import com.example.a2dtopviewsurvival.map.Tilemap;
@@ -32,29 +35,47 @@ import java.util.List;
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private final Tilemap tilemap;
-    private final Player player;
+    public final Player player;
     private final Joystick joystick;
     //    private final Enemy enemy;
     private GameLoop gameLoop;
     private List<Enemy> enemyList = new ArrayList<Enemy>();
     private List<Spell> spellList = new ArrayList<Spell>();
+    // 0 : laser / 1 : hit / 2 : hurt
+    private List<MediaPlayer> sfxList = new ArrayList<MediaPlayer>();
     private int joystickPointerId = 0;
     private int numberOfSpellsToCast = 0;
     private GameOver gameOver;
-    private Performance performance;
+    // private Performance performance;
+    private GameInfo gameInfo;
     private GameDisplay gameDisplay;
+
+    private Context context;
+
+    private int score;
+    private int survivalTime;
 
     public Game(Context context) {
         super(context);
+        this.context = context;
+
+        score = 0;
+        survivalTime = 0;
+
+        // Initialize sfx player
+        sfxList.add(MediaPlayer.create(context, R.raw.laser));
+        sfxList.add(MediaPlayer.create(context, R.raw.hit));
+        sfxList.add(MediaPlayer.create(context, R.raw.hurt));
 
         // Get surface holder and add callbacks
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
 
-        gameLoop = new GameLoop(this, surfaceHolder);
+        gameLoop = new GameLoop(this, surfaceHolder, survivalTime);
 
         // Initialize game panels
-        performance = new Performance(context, gameLoop);
+        // performance = new Performance(context, gameLoop);
+        gameInfo = new GameInfo(context, this);
         gameOver = new GameOver(context);
         joystick = new Joystick(275, 700, 70, 40);
 
@@ -116,7 +137,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         Log.d("Game.java", "surfaceCreated()");
 
         if(gameLoop.getState().equals(Thread.State.TERMINATED)) {
-            gameLoop = new GameLoop(this, holder);
+            gameLoop = new GameLoop(this, holder, survivalTime);
         }
         gameLoop.startLoop();
     }
@@ -152,7 +173,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         // Draw game panels
         joystick.draw(canvas);
-        performance.draw(canvas);
+        //performance.draw(canvas);
+        gameInfo.draw(canvas, gameDisplay);
 
         // Draw Game over if the player is dead
         if(player.getHealthPoints() <= 0) {
@@ -164,6 +186,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         // Stop updating the game if the player is dead
         if(player.getHealthPoints() <= 0) {
             joystick.resetActuator();
+            end();
             return;
         }
 
@@ -177,6 +200,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
         while(numberOfSpellsToCast > 0) {
             spellList.add(new Spell(getContext(), player));
+            laserSfx();
             numberOfSpellsToCast--;
         }
 
@@ -198,6 +222,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             if(Circle.isColliding(enemy, player)) {
                 // Remove enemy if it collides with the player
                 iteratorEnemy.remove();
+                hurtSfx();
                 player.setHealthPoints(player.getHealthPoints() - 1);
                 continue;
             }
@@ -209,17 +234,44 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 if(Circle.isColliding(spell, enemy)) {
                     iteratorSpell.remove();
                     iteratorEnemy.remove();
+                    hitSfx();
+                    score += 100;
                     break;
                 }
             }
         }
 
         gameDisplay.update();
+
+        survivalTime = gameLoop.getSurvivalTime();
     }
 
     public void pause() {
         gameLoop.stopLoop();
     }
+    public void end() {
+        gameLoop.endLoop();
+        Intent intent = new Intent(context, StoreRank.class);
+        intent.putExtra("score", score);
+        //intent.putExtra("survivalTime", survivalTime);
+        context.startActivity(intent);
+    }
+
+    private void laserSfx() {
+        sfxList.get(0).start();
+    }
+    private void hitSfx() {
+        sfxList.get(1).start();
+    }
+    private void hurtSfx() {
+        sfxList.get(2).start();
+    }
+
+    public int getScore() {  return score; }
+
+    public int getSurvivalTime() { return survivalTime; }
+
+    public void setSurvivalTime(int survivalTime) { this.survivalTime = survivalTime; }
 }
 
 

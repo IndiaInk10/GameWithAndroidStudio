@@ -14,7 +14,6 @@
         android:textSize="50sp"
         android:gravity="center|bottom"
         android:textColor="@color/white"
-        android:textStyle="bold"
         />
 
     <LinearLayout
@@ -30,9 +29,9 @@
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
             android:text="Game Start"
-            android:background="@drawable/dark_red_btn"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            android:backgroundTint="@null"
+            android:background="@color/white"
+            android:textColor="@color/black"
             android:gravity="center"
             />
         <Button
@@ -41,9 +40,9 @@
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
             android:text="Rank"
-            android:background="@drawable/dark_green_btn"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            android:backgroundTint="@null"
+            android:background="@color/white"
+            android:textColor="@color/black"
             android:gravity="center"
             />
         <Button
@@ -51,9 +50,9 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:text="Option"
-            android:background="@drawable/dark_blue_btn"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            android:backgroundTint="@null"
+            android:background="@color/white"
+            android:textColor="@color/black"
             android:gravity="center"
             />
     </LinearLayout>

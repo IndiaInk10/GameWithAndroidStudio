@@ -26,6 +26,18 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
         />
+        <activity
+            android:name=".ShowRank"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            />
+        <activity
+            android:name=".StoreRank"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            />
     </application>
 
 </manifest>

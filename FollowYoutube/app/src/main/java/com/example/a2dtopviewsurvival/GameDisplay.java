@@ -50,4 +50,6 @@ public class GameDisplay {
                 (int) (gameCenterY + heightPixels/2)
         );
     }
+
+    public int getdisplayCenterX() { return (int) displayCenterX; }
 }
