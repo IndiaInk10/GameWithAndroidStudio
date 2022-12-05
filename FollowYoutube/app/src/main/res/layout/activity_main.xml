@@ -1,18 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:background="@color/black"
+    >
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:text="SPACE SHOOTER"
+        android:textSize="50sp"
+        android:gravity="center|bottom"
+        android:textColor="@color/white"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <Button
+            android:id="@+id/startBtn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:text="Game Start"
+            android:backgroundTint="@null"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+        <Button
+            android:id="@+id/rankBtn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:text="Rank"
+            android:backgroundTint="@null"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+        <Button
+            android:id="@+id/optionBtn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="Option"
+            android:backgroundTint="@null"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</LinearLayout>

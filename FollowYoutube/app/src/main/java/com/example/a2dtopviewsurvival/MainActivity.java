@@ -4,51 +4,58 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
 import android.app.Activity;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
+import com.example.a2dtopviewsurvival.R;
 
 public class MainActivity extends Activity {
-
-    private Game game;
+    MediaPlayer bgmPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("MainActivity.java", "onCreate()");
+        bgmPlayer = MediaPlayer.create(this, R.raw.race_to_mars);
+        bgmPlayer.setLooping(true);
+        bgmPlayer.start();
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        // Set content view to game, so that objects in the Game class can be rendered to the screen
-        game = new Game(this);
-        setContentView(game);
-    }
+        Button startBtn = (Button) findViewById(R.id.startBtn) ;
+        startBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, StartGame.class) ;
 
-    @Override
-    protected void onStart() {
-        Log.d("MainActivity.java", "onStart()");
-        super.onStart();
-    }
-    @Override
-    protected void onResume() {
-        Log.d("MainActivity.java", "onResume()");
-        super.onResume();
-    }
-    @Override
-    protected void onPause() {
-        Log.d("MainActivity.java", "onPause()");
-        game.pause();
-        super.onPause();
-    }
-    @Override
-    protected void onStop() {
-        Log.d("MainActivity.java", "onStop()");
-        super.onStop();
-    }
-    @Override
-    protected void onDestroy() {
-        Log.d("MainActivity.java", "onDestroy()");
-        super.onDestroy();
+                startActivity(intent) ;
+            }
+        });
+
+        Button rankBtn = (Button) findViewById(R.id.rankBtn) ;
+        rankBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, Self1303.class) ;
+//
+//                startActivity(intent) ;
+            }
+        });
+
+        Button optionBtn = (Button) findViewById(R.id.optionBtn) ;
+        optionBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, Self1303.class) ;
+//
+//                startActivity(intent) ;
+            }
+        });
     }
 
     @Override
